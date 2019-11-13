@@ -29,12 +29,12 @@ variable "instance-capacity-max" {
 
 variable "certificate-domain" {
   type = "string"
-  default = "testelb.rakam.io"
+  default = "loadbalancername.rakam.io"
 }
 
 variable "certificate-email" {
   type = "string"
-  default = "aptoide@rakam-bi-bundle.iam.gserviceaccount.com"
+  default = "youraccount@rakam-api.iam.gserviceaccount.com"
 }
 
 # RDS Related
@@ -65,5 +65,5 @@ variable "rakam-collector-container-image" {
 
 variable "rakam-collector-license-key-name" {
   type = "string"
-  default = "tsc"
+  default = "yourlicensekeyname"
 }
