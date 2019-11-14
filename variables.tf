@@ -28,7 +28,7 @@ variable "instance-capacity-max" {
 }
 
 variable "instance-cpu-count" {
-  default = 4
+  default = 2
   type = "string"
 }
 

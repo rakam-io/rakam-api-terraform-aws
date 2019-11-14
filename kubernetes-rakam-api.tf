@@ -60,10 +60,6 @@ resource "kubernetes_daemonset" "rakam-api" {
             name  = "JAVA_OPTS"
             value = "-XX:+UnlockExperimentalVMOptions -XX:+ExitOnOutOfMemoryError -XX:MinRAMPercentage=50.0 -XX:MaxRAMPercentage=80.0"
           }
-          env {
-            name  = "RAKAM_CONFIG_HTTP_SERVER_PROXY__PROTOCOL"
-            value = "true"
-          }
           env_from {
             secret_ref {
               name = "${kubernetes_secret.rakam-api-secret.metadata.0.name}"
