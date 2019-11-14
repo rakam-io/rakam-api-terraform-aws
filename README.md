@@ -1,5 +1,5 @@
 # Rakam-API Terraform Installation
----
+
 ![Screen Recording 2019-11-14 at 06 18 PM](https://user-images.githubusercontent.com/6921843/68870025-3563f780-070b-11ea-84cd-c2fef8534b27.gif)
 ---
 This script will run on your cloud provider, we support only AWS at the moment. The following dependencies assumed to be already installed.
