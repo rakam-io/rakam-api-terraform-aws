@@ -27,7 +27,7 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
-gcr.json
+license.json
 
 *.tar.gz
 kubernetes-web-ui/metrics-server-0.3.6

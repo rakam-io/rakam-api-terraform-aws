@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "rakam" {
-  name            = "${var.cluster-name}"
-  role_arn        = "${aws_iam_role.rakam-cluster.arn}"
+  name     = "${var.cluster-name}"
+  role_arn = "${aws_iam_role.rakam-cluster.arn}"
 
   vpc_config {
     security_group_ids = ["${aws_security_group.rakam-cluster.id}"]

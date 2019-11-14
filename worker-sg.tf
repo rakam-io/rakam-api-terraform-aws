@@ -12,8 +12,8 @@ resource "aws_security_group" "rakam-node" {
 
   tags = "${
     map(
-     "Name", "terraform-eks-rakam-node",
-     "kubernetes.io/cluster/${var.cluster-name}", "owned",
+      "Name", "terraform-eks-rakam-node",
+      "kubernetes.io/cluster/${var.cluster-name}", "owned",
     )
   }"
 }

@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "rakam-api" {
 
 # Create a docker registry secret with GCP service-account provided by rakam
 resource "kubernetes_secret" "gcr" {
-	metadata {
+  metadata {
     name      = "gcr"
     namespace = "${kubernetes_namespace.rakam-api.metadata.0.name}"
   }
@@ -17,8 +17,8 @@ resource "kubernetes_secret" "gcr" {
         "us.gcr.io" : {
           email    = "${var.certificate-email}"
           username = "_json_key"
-          password = trimspace(file("${path.module}/gcr.json"))
-          auth     = base64encode(join(":", ["_json_key", file("${path.module}/gcr.json")]))
+          password = trimspace(file("${path.module}/license.json"))
+          auth     = base64encode(join(":", ["_json_key", file("${path.module}/license.json")]))
         }
       }
     })

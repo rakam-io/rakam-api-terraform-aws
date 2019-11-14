@@ -2,7 +2,7 @@
 
 provider "kubernetes" {
   cluster_ca_certificate = "${base64decode(aws_eks_cluster.rakam.certificate_authority.0.data)}"
-  host                   =  "${aws_eks_cluster.rakam.endpoint}"
+  host                   = "${aws_eks_cluster.rakam.endpoint}"
   load_config_file       = false
 
   exec {

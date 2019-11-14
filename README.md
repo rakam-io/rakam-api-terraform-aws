@@ -1,5 +1,7 @@
 # Rakam-API Terraform Installation
-
+---
+![Screen Recording 2019-11-14 at 06 18 PM](https://user-images.githubusercontent.com/6921843/68870025-3563f780-070b-11ea-84cd-c2fef8534b27.gif)
+---
 This script will run on your cloud provider, we support only AWS at the moment. The following dependencies assumed to be already installed.
 
 * Terraform cli: >= 0.12.13
@@ -24,7 +26,7 @@ Post Installations:
 * Kubectl configuration and assigning worker nodes to the EKS cluster via kubectl.
 * Setting up the optional Kubernetes web UI.
 
-
+---
 ### STEP 1: Open `provider.tf` and make the following changes:
 
 * Create a programmatic access IAM account, with preferable access to all resources. Note that after the creation of resources you can revoke its access.
@@ -38,7 +40,7 @@ provider "aws" {
   secret_key = "my-secret-key"
 }
 ```
-
+---
 ### STEP 2: Open `variables.tf` and make the following changes if needed:
 
 * `aws_region`: The resources will be provisioned from the given location.
@@ -51,6 +53,8 @@ provider "aws" {
 
 * `instance-capacity-max`: What is the maximum number of nodes that the autoscaling group can provision. Upon high loads, the node group will scale up and down with respect to `instance-capacity-max` and `instance-capacity-min`
 
+* `instance-cpu-count`: Enter the number of vCPU's of your instance, and available memory in GB's to `instance-ram-in-gb`. These variables helps setting appropiate resource requests and limits to daemonset and deployment pods.
+
 * `certificate-domain`: The alt domain name of your API. e.g `rakam-api-prod.yourdomain.com`
 
 * `certificate-email`: A valid e-mail address for ACM validation.
@@ -62,7 +66,7 @@ provider "aws" {
 * `rakam-collector-license-key-name` your license key name given by us.
 
 ### Step 3: Put your license key to the same folder.
-This project uses a private container registry of rakam. Copy the `gcr.json` to the same directory where the `.tf` files are.
+This project uses a private container registry of rakam. Copy the `license.json` to the same directory where the `.tf` files are.
 
 
 ### STEP 4: terraform init: Download the required modules
@@ -98,6 +102,7 @@ For the example given above, create a `CNAME` record from `_a1aa2b7b49c946d14859
 ### STEP 7: Connect worker nodes to EKS cluster.
 run `./configure` script located on the main directory. You may need to execute `chmod +x ./configure` to make the file executable. This script will set the kube config file located at `~/.kube/config`. Second step of the script is to assign the worker pools to the EKS cluster.
 
+---
 ### (OPTIONAL) STEP: Install Kubernetes Dashboard UI
 Run the following command in main directory to install the kubernetes web UI;
 `cd ./kubernetes-web-ui && chmod +x ./configure.sh && ./configure.sh`
@@ -122,6 +127,7 @@ Starting to serve on 127.0.0.1:8001
 The connect.sh script will create a local-port forwarding on port: 8001. Navigate to: 
 `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login` and log in using the token.
 
+---
 ### Scaling up/Down, Changing instance-type
 By altering the `instance-capacity` variables you can manually scale up or down the cluster. If you change the `instance-type` variable and perform `terraform apply` command, the autoscaling groups default instance type will change. However, it will not roll-up new nodes.
 
@@ -129,8 +135,6 @@ You have to go to your AWS console, navigate to EC2 -> Auto Scaling Groups -> `t
 
 ![Screen Shot 2019-11-13 at 21 19 24](https://user-images.githubusercontent.com/6921843/68791914-5d941d80-065b-11ea-9a1c-4bca4395c74b.png)
 
-Note that, while changing the `instance-type` old nodes will not be terminated automatically. After completing the same step for each node. You may terminate the old instances.
+Note that, while changing the `instance-type` old nodes will not be terminated automatically. After completing the same step for each node. You may terminate the old instances. However, while only changing the `instance-capacity` you don't have to drain/terminate any instance. This will be done automatically by the autoscaling group policies.
 
 ![Screen Shot 2019-11-13 at 18 42 30](https://user-images.githubusercontent.com/6921843/68791966-7d2b4600-065b-11ea-8eb9-d1da0b73fee4.png)
-
-However, while only changing the `instance-capacity` you don't have to drain/terminate any instance. This will be done automatically by the autoscaling group policies.

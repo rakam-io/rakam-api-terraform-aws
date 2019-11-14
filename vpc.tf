@@ -7,8 +7,8 @@ resource "aws_vpc" "rakam" {
 
   tags = "${
     map(
-     "Name", "terraform-eks-rakam-node",
-     "kubernetes.io/cluster/${var.cluster-name}", "shared",
+      "Name", "terraform-eks-rakam-node",
+      "kubernetes.io/cluster/${var.cluster-name}", "shared",
     )
   }"
 }
@@ -22,8 +22,8 @@ resource "aws_subnet" "rakam" {
 
   tags = "${
     map(
-     "Name", "terraform-eks-rakam-node",
-     "kubernetes.io/cluster/${var.cluster-name}", "shared",
+      "Name", "terraform-eks-rakam-node",
+      "kubernetes.io/cluster/${var.cluster-name}", "shared",
     )
   }"
 }

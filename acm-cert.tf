@@ -13,9 +13,9 @@ resource "aws_acm_certificate" "cert" {
 }
 
 output "cert-arn" {
-    value = aws_acm_certificate.cert.arn
+  value = aws_acm_certificate.cert.arn
 }
 
 output "cert-dns" {
-    value = aws_acm_certificate.cert.domain_validation_options
+  value = aws_acm_certificate.cert.domain_validation_options
 }
