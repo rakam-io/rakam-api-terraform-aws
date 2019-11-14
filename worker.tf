@@ -31,7 +31,7 @@ resource "aws_launch_configuration" "rakam" {
   iam_instance_profile        = "${aws_iam_instance_profile.rakam-node.name}"
   image_id                    = "${data.aws_ami.eks-worker.id}"
   instance_type               = "${var.instance-type}"
-  name_prefix                 = "terraform-eks-rakam"
+  name_prefix                 = "terraform-eks-worker"
   security_groups             = ["${aws_security_group.rakam-node.id}"]
   user_data_base64            = "${base64encode(local.rakam-node-userdata)}"
 
@@ -46,12 +46,12 @@ resource "aws_autoscaling_group" "rakam" {
   launch_configuration = "${aws_launch_configuration.rakam.id}"
   max_size             = "${var.instance-capacity-max}"
   min_size             = "${var.instance-capacity-min}"
-  name                 = "terraform-eks-rakam"
+  name                 = "terraform-eks-workers"
   vpc_zone_identifier  = "${aws_subnet.rakam.*.id}"
 
   tag {
     key                 = "Name"
-    value               = "terraform-eks-rakam"
+    value               = "terraform-eks-workers"
     propagate_at_launch = true
   }
 

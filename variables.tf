@@ -8,7 +8,7 @@ variable "cluster-name" {
 }
 
 variable "instance-type" {
-  default = "t3.large"
+  default = "t3a.xlarge"
   type    = "string"
 }
 
@@ -28,12 +28,12 @@ variable "instance-capacity-max" {
 }
 
 variable "instance-cpu-count" {
-  default = 2
+  default = 4
   type = "string"
 }
 
 variable "instance-ram-in-gb" {
-  default = 8
+  default = 16
   type = "string"
 }
 
