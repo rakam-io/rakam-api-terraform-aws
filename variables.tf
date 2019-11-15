@@ -24,7 +24,7 @@ variable "instance-capacity-min" {
 }
 
 variable "instance-capacity-max" {
-  default = 6
+  default = 2
   type    = "string"
 }
 
@@ -39,7 +39,6 @@ variable "instance-ram-in-gb" {
 }
 
 # ACM related
-
 variable "certificate-domain" {
   type    = "string"
   default = "aptoidelb.rakam.io"
@@ -84,5 +83,5 @@ variable "rakam-collector-license-key-name" {
 
 variable "rakam-collector-kinesis-shard-count" {
   type    = "string"
-  default = 2
+  default = 1
 }

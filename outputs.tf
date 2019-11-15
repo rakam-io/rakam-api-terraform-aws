@@ -79,3 +79,12 @@ output "nlb-hostname" {
   description = "Set this CNAME pointing to your domain, verified via ACM"
   value = "${kubernetes_service.loadbalancer-nlb.load_balancer_ingress.0.hostname}"
 }
+
+# Snowflake
+output "snowflake-iam-key-id" {
+  value = "${aws_iam_access_key.snowflake-user.id}"
+}
+
+output "snowflake-iam-key-secret" {
+  value = "${aws_iam_access_key.snowflake-user.secret}"
+}
