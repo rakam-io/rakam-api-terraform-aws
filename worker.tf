@@ -73,8 +73,8 @@ resource "aws_autoscaling_group" "rakam" {
   ]
 }
 
-# Policy to scale the cluster
-resource "aws_autoscaling_policy" "rakam" {
+# TODO: Policy to scale the cluster
+/* resource "aws_autoscaling_policy" "rakam" {
   name                   = "rakam-cpu-autoscaler"
   adjustment_type        = "ChangeInCapacity"
   autoscaling_group_name = "${aws_autoscaling_group.rakam.name}"
@@ -84,6 +84,6 @@ resource "aws_autoscaling_policy" "rakam" {
     predefined_metric_specification {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
-    target_value = 40.0
+    target_value = 30.0
   }
-}
+}*/
