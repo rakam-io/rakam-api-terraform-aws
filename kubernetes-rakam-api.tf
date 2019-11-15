@@ -1,4 +1,4 @@
-resource "kubernetes_daemonset" "rakam-api" {
+resource "kubernetes_deployment" "rakam-api" {
   depends_on = ["kubernetes_namespace.rakam-api"]
   metadata {
     name      = "rakam-api"
@@ -9,6 +9,7 @@ resource "kubernetes_daemonset" "rakam-api" {
   }
 
   spec {
+    replicas = 2
     selector {
       match_labels = {
         app = "rakam-api"
@@ -94,14 +95,15 @@ resource "kubernetes_daemonset" "rakam-api" {
 
 # Expose rakam-api over external L4 loadbalancer
 resource "kubernetes_service" "loadbalancer-nlb" {
-  depends_on = ["kubernetes_daemonset.rakam-api"]
+  depends_on = ["kubernetes_deployment.rakam-api"]
   metadata {
-    name      = "rakamapi-loadbalancer-nlb"
+    name      = "loadbalancer-nlb"
     namespace = "${kubernetes_namespace.rakam-api.metadata.0.name}"
     annotations = {
       "service.beta.kubernetes.io/aws-load-balancer-type"                     = "nlb"
       # ssl-cert is added on kubernetes 1.15. Expected delivery to EKS is ~Dec'19.
       # While EKS supports 1.14 time of this release. 443 port has to be changed to TLS and arn to acm cert arn.
+      # See documentation
       "service.beta.kubernetes.io/aws-load-balancer-ssl-cert"                = "${aws_acm_certificate.cert.arn}"
       "service.beta.kubernetes.io/aws-load-balancer-backend-protocol"        = "http"
       "service.beta.kubernetes.io/aws-load-balancer-ssl-ports"               = "443"
@@ -124,7 +126,7 @@ resource "kubernetes_service" "loadbalancer-nlb" {
     }
 
     selector = {
-      app = "${kubernetes_daemonset.rakam-api.metadata.0.labels.app}"
+      app = "${kubernetes_deployment.rakam-api.metadata.0.labels.app}"
     }
   }
 }

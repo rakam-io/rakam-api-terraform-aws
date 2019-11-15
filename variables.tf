@@ -24,17 +24,17 @@ variable "instance-capacity-min" {
 }
 
 variable "instance-capacity-max" {
-  default = 2
+  default = 6
   type    = "string"
 }
 
 variable "instance-cpu-count" {
-  default = 4
+  default = 2
   type = "string"
 }
 
 variable "instance-ram-in-gb" {
-  default = 16
+  default = 8
   type = "string"
 }
 
@@ -84,5 +84,5 @@ variable "rakam-collector-license-key-name" {
 
 variable "rakam-collector-kinesis-shard-count" {
   type    = "string"
-  default = 1
+  default = 2
 }

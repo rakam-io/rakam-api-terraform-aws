@@ -72,3 +72,18 @@ resource "aws_autoscaling_group" "rakam" {
     "GroupTotalInstances",
   ]
 }
+
+# Policy to scale the cluster
+resource "aws_autoscaling_policy" "rakam" {
+  name                   = "rakam-cpu-autoscaler"
+  adjustment_type        = "ChangeInCapacity"
+  autoscaling_group_name = "${aws_autoscaling_group.rakam.name}"
+  policy_type = "TargetTrackingScaling"
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 40.0
+  }
+}

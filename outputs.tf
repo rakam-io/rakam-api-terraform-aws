@@ -31,6 +31,7 @@ KUBECONFIG
 
 output "kubeconfig" {
   value = "${local.kubeconfig}"
+  sensitive   = true
 }
 
 # Required Kubernetes Configuration to Join Worker Nodes
@@ -55,6 +56,7 @@ CONFIGMAPAWSAUTH
 
 output "config_map_aws_auth" {
   value = "${local.config_map_aws_auth}"
+  sensitive   = true
 }
 
 # Kinesis stream name
@@ -70,4 +72,10 @@ output "s3_bucket_name" {
 # RDS
 output "mysql_endpoint" {
   value = "${aws_db_instance.rakammysql.endpoint}"
+}
+
+# NLB
+output "nlb-hostname" {
+  description = "Set this CNAME pointing to your domain, verified via ACM"
+  value = "${kubernetes_service.loadbalancer-nlb.load_balancer_ingress.0.hostname}"
 }
