@@ -1,4 +1,5 @@
 resource "kubernetes_daemonset" "rakam-api" {
+  depends_on = ["kubernetes_namespace.rakam-api"]
   metadata {
     name      = "rakam-api"
     namespace = "${kubernetes_namespace.rakam-api.metadata.0.name}"
@@ -93,6 +94,7 @@ resource "kubernetes_daemonset" "rakam-api" {
 
 # Expose rakam-api over external L4 loadbalancer
 resource "kubernetes_service" "loadbalancer-nlb" {
+  depends_on = ["kubernetes_daemonset.rakam-api"]
   metadata {
     name      = "rakamapi-loadbalancer-nlb"
     namespace = "${kubernetes_namespace.rakam-api.metadata.0.name}"

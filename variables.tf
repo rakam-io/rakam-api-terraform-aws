@@ -1,17 +1,18 @@
+# Globals
 variable "aws_region" {
   description = "Region for Rakam stack deployment"
-  default     = "eu-west-2"
+  default     = "eu-west-1"
 }
 variable "cluster-name" {
   default = "terraform-eks-rakam"
   type    = "string"
 }
 
+# Autoscaling related
 variable "instance-type" {
-  default = "t3a.xlarge"
+  default = "t3a.large"
   type    = "string"
 }
-
 variable "instance-capacity" {
   default = 2
   type    = "string"
@@ -37,10 +38,11 @@ variable "instance-ram-in-gb" {
   type = "string"
 }
 
+# ACM related
 
 variable "certificate-domain" {
   type    = "string"
-  default = "testelb.rakam.io"
+  default = "aptoidelb.rakam.io"
 }
 
 variable "certificate-email" {

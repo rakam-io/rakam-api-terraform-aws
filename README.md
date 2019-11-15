@@ -27,6 +27,9 @@ Post Installations:
 * Setting up the optional Kubernetes web UI.
 
 ---
+### Step 0: Set terraform backend
+To store safely your tfstate files, setup your backend on `backend.tf`. Running `terraform init` will also initalize your backend alongside with required modules.
+
 ### STEP 1: Open `provider.tf` and make the following changes:
 
 * Create a programmatic access IAM account, with preferable access to all resources. Note that after the creation of resources you can revoke its access.
