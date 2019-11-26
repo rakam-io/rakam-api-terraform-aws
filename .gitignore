@@ -31,3 +31,5 @@ license.json
 
 *.tar.gz
 kubernetes-web-ui/metrics-server-0.3.6
+.DS_STORE
+*variables.tf

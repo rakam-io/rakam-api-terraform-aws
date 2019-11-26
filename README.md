@@ -44,7 +44,7 @@ provider "aws" {
 }
 ```
 ---
-### STEP 2: Open `variables.tf` and make the following changes if needed:
+### STEP 2: Rename `variables.example.tf` to `variables.tf` and make the following changes if needed:
 
 * `aws_region`: The resources will be provisioned from the given location.
 

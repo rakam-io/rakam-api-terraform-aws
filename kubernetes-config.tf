@@ -1,5 +1,6 @@
 # Create a namespace for rakam-api
 resource "kubernetes_namespace" "rakam-api" {
+  depends_on = ["aws_eks_cluster.rakam", "aws_autoscaling_group.rakam"]
   metadata {
     name = "rakam-api"
   }

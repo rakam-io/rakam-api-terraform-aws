@@ -2,8 +2,8 @@
 # https://www.terraform.io/docs/backends/types/s3.html
 terraform {
   backend "s3" {
-    bucket = "tf-state-appwise"
-    key    = "rakam-api-tf/"
+    bucket = "terraform-rakam"
+    key    = "rakam-api-tf/terraform.tfstate"
     region = "eu-west-1"
   }
 }

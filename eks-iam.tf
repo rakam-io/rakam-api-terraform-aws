@@ -17,6 +17,7 @@ resource "aws_iam_role" "rakam-cluster" {
 POLICY
 }
 
+
 resource "aws_iam_role_policy_attachment" "rakam-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = "${aws_iam_role.rakam-cluster.name}"
@@ -24,5 +25,10 @@ resource "aws_iam_role_policy_attachment" "rakam-cluster-AmazonEKSClusterPolicy"
 
 resource "aws_iam_role_policy_attachment" "rakam-cluster-AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+  role       = "${aws_iam_role.rakam-cluster.name}"
+}
+
+resource "aws_iam_role_policy_attachment" "rakam-cluster-ElasticLoadBalancingFullAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
   role       = "${aws_iam_role.rakam-cluster.name}"
 }

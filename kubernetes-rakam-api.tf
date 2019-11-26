@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "rakam-api" {
+resource "kubernetes_daemonset" "rakam-api" {
   depends_on = ["kubernetes_namespace.rakam-api"]
   metadata {
     name      = "rakam-api"
@@ -9,7 +9,6 @@ resource "kubernetes_deployment" "rakam-api" {
   }
 
   spec {
-    replicas = 2
     selector {
       match_labels = {
         app = "rakam-api"
@@ -95,7 +94,7 @@ resource "kubernetes_deployment" "rakam-api" {
 
 # Expose rakam-api over external L4 loadbalancer
 resource "kubernetes_service" "loadbalancer-nlb" {
-  depends_on = ["kubernetes_deployment.rakam-api"]
+  depends_on = ["kubernetes_daemonset.rakam-api"]
   metadata {
     name      = "loadbalancer-nlb"
     namespace = "${kubernetes_namespace.rakam-api.metadata.0.name}"
@@ -126,7 +125,7 @@ resource "kubernetes_service" "loadbalancer-nlb" {
     }
 
     selector = {
-      app = "${kubernetes_deployment.rakam-api.metadata.0.labels.app}"
+      app = "${kubernetes_daemonset.rakam-api.metadata.0.labels.app}"
     }
   }
 }

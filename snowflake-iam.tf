@@ -6,7 +6,7 @@ resource "aws_iam_access_key" "snowflake-user" {
   user = "${aws_iam_user.snowflake-user.name}"
 }
 
-resource "aws_iam_user_policy" "lb_ro" {
+resource "aws_iam_user_policy" "snowflake-user-policy" {
   name = "test"
   user = "${aws_iam_user.snowflake-user.name}"
 

@@ -39,30 +39,31 @@ variable "instance-ram-in-gb" {
 }
 
 # ACM related
+
 variable "certificate-domain" {
   type    = "string"
-  default = "aptoidelb.rakam.io"
+  default = "rakam-api._example.com"
 }
 
 variable "certificate-email" {
   type    = "string"
-  default = "youraccount@rakam-api.iam.gserviceaccount.com"
+  default = "sysadmin@_example.com"
 }
 
 # RDS Related
 variable "rakam-rds-username" {
   type    = "string"
-  default = "username"
+  default = "rakam"
 }
 variable "rakam-rds-password" {
   type    = "string"
-  default = "password"
+  default = "xxxxx"
 }
 
 # Rakam-API Related
 variable "rakam-api-lock-key" {
   type    = "string"
-  default = "4sdJIqLsZXtHv8cdctGJHe"
+  default = "xxxxx"
 }
 
 variable "rakam-api-container-image" {
@@ -78,7 +79,7 @@ variable "rakam-collector-container-image" {
 
 variable "rakam-collector-license-key-name" {
   type    = "string"
-  default = "aptoide"
+  default = "xxxx"
 }
 
 variable "rakam-collector-kinesis-shard-count" {
